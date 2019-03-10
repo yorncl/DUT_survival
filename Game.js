@@ -1,23 +1,38 @@
-class Game{
 
-    constructor(canvas){
-        this.canvas=canvas;
-    }
 
-    login(){
 
-    }
+class Game {
 
-    menu(){
+    constructor(ctx) {
+        this.ctx = ctx;
+        this.ui = null;
 
     }
 
-    play(){
+    login() {
+        this.ui = new UI(this.ctx);
+        this.ui.add_button(300, 50, 80, 40, "Login", () => {
+            console.log("Button working");
+        });
+    }
+
+    menu() {
 
     }
 
-    score(){
+    play() {
 
     }
 
+    score() {
+
+    }
+
+    draw() {
+        this.ui.draw();
+    }
+
+    onclick(mx, my) {
+        this.ui.onclick(mx, my);
+    }
 }
