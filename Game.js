@@ -4,6 +4,7 @@
 class Game {
 
     constructor(ctx) {
+        this.playing=false;
         this.ctx = ctx;
         this.ui = null;
 
@@ -11,9 +12,12 @@ class Game {
 
     login() {
         this.ui = new UI(this.ctx);
-        this.ui.add_button(300, 50, 80, 40, "Login", () => {
-            console.log("Button working");
+        this.ui.add_button(500, 50, 80, 40, "Login", () => {
+            this.play();
         });
+
+        
+        
     }
 
     menu() {
@@ -21,7 +25,11 @@ class Game {
     }
 
     play() {
-
+        this.ui=new UI(this.ctx);
+        this.map=new MAP
+        this.ui.add_button(30, 20, 80, 40, "Login", () => {
+            this.login();
+        });
     }
 
     score() {
@@ -29,6 +37,8 @@ class Game {
     }
 
     draw() {
+        this.ctx
+        this.ctx.clearRect(0, 0, this.ctx.canvas.clientWidth, this.ctx.canvas.clientHeight);
         this.ui.draw();
     }
 

@@ -1,7 +1,17 @@
-class Room{
+class Room extends Drawable{
 
-    constructor(){
-        this.layout=new Array();
+    constructor(x,y,width,height,ctx,layout){
+        super(x,y,width,height,ctx)
+        this.layout=layout;
     }
+
+    set_layout(){
+
+    }
+
+    draw(){
+
+    }
+
 
 }

@@ -7,7 +7,6 @@ class Button extends Drawable {
     }
 
     is_clicked(mx, my) {
-        console.log(mx,this.dx,this.dx+this.width);
         if (mx >= this.dx && mx <= this.dx + this.width && my >= this.dy && my <= this.dy + this.height)
             return true;
         else
@@ -16,7 +15,7 @@ class Button extends Drawable {
 
     draw() {
         this.ctx.fillStyle = "#FF0000";
-        this.ctx.fillRect(this.dx, this.dy, this.x + this.width, this.y + this.height);
+        this.ctx.fillRect(this.dx, this.dy, this.width, this.height);
     }
 
 }

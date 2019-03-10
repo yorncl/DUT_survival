@@ -1,9 +1,12 @@
 class Map{
 
-    constructor(){
+    constructor(layout){
         this.layout=new Array();
         this.rooms=new Array();
     }
 
+    draw(){
+        for()
+    }
     
 }
