@@ -17,15 +17,15 @@ window.onload = function () {
 
     //Basic Event Listeners
     //Keys
-    document.addEventListener("keydown", (event)=>{
+    document.addEventListener("keydown", (event) => {
 
     });
     //Mouse
-    canvas.addEventListener("click",(event)=>{
-        mouse_pos=getMousePos(event);
-        mouse_x=mouse_pos.x;
-        mouse_y=mouse_pos.y;
-        g.onclick(mouse_x,mouse_y);
+    canvas.addEventListener("click", (event) => {
+        mouse_pos = getMousePos(event);
+        mouse_x = mouse_pos.x;
+        mouse_y = mouse_pos.y;
+        g.onclick(mouse_x, mouse_y);
     });
 
     //Basic scripts
@@ -44,7 +44,7 @@ window.onload = function () {
 function getMousePos(event) {
     var rect = canvas.getBoundingClientRect();
     return {
-      x: event.clientX - rect.left,
-      y: event.clientY - rect.top
+        x: event.clientX - rect.left,
+        y: event.clientY - rect.top
     };
 }
