@@ -6,7 +6,7 @@ class Room extends Drawable{
     }
 
     set_layout(){
-
+        
     }
 
     draw(){

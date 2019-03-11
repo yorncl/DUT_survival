@@ -23,7 +23,7 @@ class Game {
 
     play() {
         this.ui = new UI(this.ctx);
-        this.map = new MAP();
+        //this.map = new MAP();
         this.ui.add_button(30, 20, 80, 40, "Login", () => {
             this.login();
         });
