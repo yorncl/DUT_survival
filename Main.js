@@ -15,18 +15,6 @@ window.onload = function () {
     //Game initialization
     game = new Game(canvas.getContext("2d"));
 
-    //Basic Event Listeners
-    //Keys
-    document.addEventListener("keydown", (event) => {
-
-    });
-    //Mouse
-    canvas.addEventListener("click", (event) => {
-        mouse_pos = getMousePos(event);
-        mouse_x = mouse_pos.x;
-        mouse_y = mouse_pos.y;
-        game.onclick(mouse_x, mouse_y);
-    });
 
     //Basic scripts
     game.set_state_to("LOGIN");
@@ -41,10 +29,3 @@ window.onload = function () {
 
 
 //Get mouse position inside the canvas
-function getMousePos(event) {
-    var rect = canvas.getBoundingClientRect();
-    return {
-        x: event.clientX - rect.left,
-        y: event.clientY - rect.top
-    };
-}
