@@ -1,6 +1,6 @@
 
 let canvas;
-
+let game;
 
 window.onload = function () {
 
@@ -13,7 +13,7 @@ window.onload = function () {
 
 
     //Game initialization
-    let g = new Game(canvas.getContext("2d"));
+    game = new Game(canvas.getContext("2d"));
 
     //Basic Event Listeners
     //Keys
@@ -25,15 +25,15 @@ window.onload = function () {
         mouse_pos = getMousePos(event);
         mouse_x = mouse_pos.x;
         mouse_y = mouse_pos.y;
-        g.onclick(mouse_x, mouse_y);
+        game.onclick(mouse_x, mouse_y);
     });
 
     //Basic scripts
-    g.login();
+    game.set_state_to("LOGIN");
 
     //Game loop
     function game_loop() {
-        g.draw();
+        game.draw();
         setTimeout(requestAnimationFrame(game_loop), 1000);
     }
     game_loop();
