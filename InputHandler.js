@@ -6,7 +6,7 @@ class InputHandler {
         this.onclick_action = null;
         this.keydown_action = null;
         this.keys_active = false;
-        this.mouse_active= false;
+        this.mouse_active = false;
         document.addEventListener("keydown", (event) => { this.onkeydown(event) });
         this.state.ctx.canvas.addEventListener("click", (event) => { this.onclick(event) });
     }
@@ -16,31 +16,32 @@ class InputHandler {
     }
 
     listen_mouse(value) {
-        this.mouse_.active = value;
+        this.mouse_active = value;
     }
 
-    set_onkeydown_action(action){
-        this.onkeydown_action=action;
+    set_onkeydown_action(action) {
+        this.onkeydown_action = action;
     }
 
-    set_onclick_action(action){
-        this.onclick_action=action;
+    set_onclick_action(action) {
+        this.onclick_action = action;
     }
 
     onkeydown(event) {
+        if (!this.keys_active)
+            return;
         if (this.onkeydown_action === null)
             throw new Error("Please define onkeydown action with set_onkeydown_action()");
+        this.onkeydown_action(event);
     }
 
     onclick(event) {
+        if (!this.mouse_active)
+            return;
         if (this.onclick_action === null)
-            throw new Error("Please define onkeydown action with set_onclick_action()");
+            throw new Error("Please define onclick action with set_onclick_action()");
         let pos = this.get_mouse_xy(event);
-        this.onclick_action(pos.x, posY);
-    }
-
-    set_action(action) {
-        this.action = action;
+        this.onclick_action(pos.x, pos.y);
     }
 
     set_controls_to(keys) {

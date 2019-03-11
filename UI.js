@@ -15,6 +15,7 @@ class UI {
 
     add_button(x, y, width, height, label, action) {
         this.Buttons.push(new Button(x, y, width, height, label, this.ctx, action));
+        return this;
     }
 
     draw() {

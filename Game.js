@@ -7,7 +7,7 @@ class Game {
         this.playing = false;
         this.ctx=ctx;
         this.state=new GameState(this);
-        this.ih=new InputHandler(this);
+        
     }
 
     set_state_to(state) {
