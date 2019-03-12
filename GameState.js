@@ -9,7 +9,9 @@ class GameState {
     }
 
     set_to(name) {
+
         switch (name) {
+
             case "STARTING":
                 this.draw = () => { };
                 this.asset_manager.require("assets/img/test.png", "test_img", "img");
@@ -42,6 +44,7 @@ class GameState {
                 this.input_handler.set_onclick_action((x, y) => (this.ui.onclick(x, y)));
 
                 break;
+
             case "LOADING_PLAYING_ASSETS":
                 //IMG
                 this.draw = () => { this.ui.draw(); };
@@ -59,8 +62,11 @@ class GameState {
                 break;
             default:
                 throw new Error("No such Gamestate as " + name);
+
         }
+
         this.name = name;
+
     }
 
 }
