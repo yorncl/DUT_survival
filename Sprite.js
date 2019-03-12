@@ -6,8 +6,7 @@ class Sprite extends Drawable{
     }
 
     draw(){
-        this.ctx.drawImage();
-        
+        this.ctx.drawImage(this.img,this.dx,this.dy,this.width,this.height);
     }
 
 }

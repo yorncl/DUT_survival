@@ -5,18 +5,38 @@ class GameState {
         this.ui = null;
         this.ctx = game.ctx;
         this.input_handler = new InputHandler(this);
-        this.asset_manager = this.game.asset_manager;
+        this.asset_manager = game.asset_manager;
     }
 
     set_to(name) {
 
         switch (name) {
-            case "LOGIN":
 
+            case "STARTING":
+                this.draw = () => { };
+                this.asset_manager.require("assets/img/test.png", "test_img", "img");
+                this.asset_manager.require("assets/img/loading.png", "loading_splashscreen", "img");
+                this.asset_manager.download_all_assets(() => {
+                    setTimeout(() => {
+                        this.set_to("LOADING_UI_ASSETS");
+                    }, 1000);
+                });
+                break;
+            case "LOADING_UI_ASSETS":
+                this.ui = new UI(this.ctx);
+                this.ui.add_button(500, 50, 80, 40, "Loading", () => { });
+                this.ui.add_sprite(300, 300, 260, 260, this.asset_manager.get_asset("loading_splashscreen"));
+                this.draw = () => { this.ui.draw(); };
+                setTimeout(() => {
+                    this.set_to("LOGIN");
+                }, 1000);
+                break;
+            case "LOGIN":
+                this.draw = () => { this.ui.draw(); };
                 //UI init
                 this.ui = new UI(this.ctx);
-                this.ui.add_button(500, 50, 80, 40, "Play", () => {
-                    this.set_to("PLAYING");
+                this.ui.add_button(300, 300, 80, 40, "Play", () => {
+                    this.set_to("LOADING_PLAYING_ASSETS");
                 });
 
                 //INPUT init
@@ -25,22 +45,28 @@ class GameState {
 
                 break;
 
-            case "LOAD_ASSETS":
+            case "LOADING_PLAYING_ASSETS":
                 //IMG
-                this.asset_manager.require("assets/img/test.png","test_img","img");
-                
-                this.asset_manager.download_all_assets(this.set_to("PLAYING"));
+                this.draw = () => { this.ui.draw(); };
+                this.ui = new UI(this.ctx);
+                this.ui.add_sprite(300, 300, 50, 50, this.asset_manager.get_asset("loading_splashscreen"));
+                setTimeout(() => {
+                    this.set_to("PLAYING");
+                }, 1000);
+                break;
+            case "PLAYING":
+                this.ui = new UI(this.ctx);
+                this.draw = () => {
+                    this.ui.draw();
+                };
+                break;
+            default:
+                throw new Error("No such Gamestate as " + name);
 
-            case "PLAYING"
         }
 
         this.name = name;
 
     }
-
-    draw() {
-        this.ui.draw();
-    }
-
 
 }

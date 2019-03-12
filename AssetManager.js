@@ -10,14 +10,19 @@ class AssetManager {
         this.queue.push({ path: asset_path, name: asset_name, type: asset_type });
     }
 
-    get_asset(name){
-        return this.assets.find((object)=>{
-            return object.name=name;
-        }).content;
+    get_asset(name) {
+        let asset = this.assets.find((object) => {
+            return object.name = name;
+        });
+
+        if (asset === null)
+            throw new Error("No such asset");
+
+        return asset;
     }
 
-    is_download_complete(){
-        return this.download_success==this.queue.length ? true : false;
+    is_download_complete() {
+        return this.download_success == this.queue.length ? true : false;
     }
 
     download_all_assets(callback) {
@@ -25,7 +30,7 @@ class AssetManager {
         let img;
         for (let i = 0; i < this.queue.length; i++) {
             if (this.queue[i].type === "img") {
-                let img = new Image();
+                img = new Image();
                 img.addEventListener("load", () => {
                     this.assets.push({ name: this.queue[i].name, content: img });
                     this.download_success++;

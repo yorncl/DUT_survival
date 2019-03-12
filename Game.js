@@ -4,10 +4,9 @@
 class Game {
 
     constructor(ctx) {
-        this.playing = false;
         this.ctx=ctx;
+        this.asset_manager=new AssetManager(); 
         this.state=new GameState(this);
-        this.asset_manager=new AssetManager();
         
     }
     
@@ -17,8 +16,7 @@ class Game {
 
     
     draw() {
-      //  this.ctx.clearRect(0, 0, this.ctx.canvas.clientWidth, this.ctx.canvas.clientHeight);
-        
+        this.ctx.clearRect(0, 0, this.ctx.canvas.clientWidth, this.ctx.canvas.clientHeight);
         this.state.draw();
     }
 

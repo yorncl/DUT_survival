@@ -2,6 +2,7 @@ class UI {
 
     constructor(ctx) {
         this.Buttons = new Array();
+        this.Sprites= new Array();
         this.ctx = ctx;
     }
 
@@ -18,9 +19,18 @@ class UI {
         return this;
     }
 
+    add_sprite(x, y, width, height, asset) {
+        console.log(asset);
+        this.Sprites.push(new Sprite(x, y, width, height, this.ctx, asset.content));
+        return this;
+    }
+
     draw() {
         for (let i = 0; i < this.Buttons.length; i++) {
             this.Buttons[i].draw();
+        }
+        for (let i = 0; i < this.Sprites.length; i++) {
+            this.Sprites[i].draw();
         }
     }
 

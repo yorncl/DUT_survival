@@ -17,7 +17,7 @@ window.onload = function () {
 
 
     //Basic scripts
-    game.set_state_to("LOGIN");
+    game.set_state_to("STARTING");
 
     //Game loop
     function game_loop() {
