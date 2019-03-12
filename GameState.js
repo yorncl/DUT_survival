@@ -5,6 +5,7 @@ class GameState {
         this.ui = null;
         this.ctx = game.ctx;
         this.input_handler = new InputHandler(this);
+        this.asset_manager = this.game.asset_manager;
     }
 
     set_to(name) {
@@ -20,17 +21,17 @@ class GameState {
 
                 //INPUT init
                 this.input_handler.listen_mouse(true);
-                this.input_handler.set_onclick_action((x,y)=>(this.ui.onclick(x,y)));
-                
+                this.input_handler.set_onclick_action((x, y) => (this.ui.onclick(x, y)));
+
                 break;
 
-            case "PLAYING":
-                //UI init
-                this.ui = new UI(this.ctx);
-                this.ui.add_button(30, 20, 80, 40, "Login", () => {
-                    this.set_to("LOGIN");
-                });
-                break;
+            case "LOAD_ASSETS":
+                //IMG
+                this.asset_manager.require("assets/img/test.png","test_img","img");
+                
+                this.asset_manager.download_all_assets(this.set_to("PLAYING"));
+
+            case "PLAYING"
         }
 
         this.name = name;
