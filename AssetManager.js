@@ -8,6 +8,7 @@ class AssetManager {
 
     require(asset_path, asset_name, asset_type) {
         this.queue.push({ path: asset_path, name: asset_name, type: asset_type });
+        return this;
     }
 
     get_asset(name) {
@@ -56,5 +57,5 @@ class AssetManager {
             }
         }
     }
-
-}
+    
+} 

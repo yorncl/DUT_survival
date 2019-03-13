@@ -14,13 +14,14 @@ class GameState {
 
             case "STARTING":
                 this.draw = () => { };
-                this.asset_manager.require("assets/img/test.png", "test_img", "img");
-                this.asset_manager.require("assets/img/loading.png", "loading_splashscreen", "img");
-                this.asset_manager.download_all_assets(() => {
-                    setTimeout(() => {
-                        this.set_to("LOADING_UI_ASSETS");
-                    }, 1000);
-                });
+                this.asset_manager
+                    .require("assets/img/test.png", "test_img", "img")
+                    .require("assets/img/loading.png", "loading_splashscreen", "img")
+                    .download_all_assets(() => {
+                        setTimeout(() => {
+                            this.set_to("LOADING_UI_ASSETS");
+                        }, 1000);
+                    });
                 break;
             case "LOADING_UI_ASSETS":
                 this.ui = new UI(this.ctx);
