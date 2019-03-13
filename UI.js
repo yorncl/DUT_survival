@@ -20,7 +20,6 @@ class UI {
     }
 
     add_sprite(x, y, width, height, asset) {
-        console.log(asset);
         this.Sprites.push(new Sprite(x, y, width, height, this.ctx, asset.content));
         return this;
     }

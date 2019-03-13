@@ -16,8 +16,8 @@ class GameState {
                 this.draw = () => { };
                 this.asset_manager
                     .require("assets/img/test.png", "test_img", "img")
+                    .require("ConfigMap.json","map","json")
                     .require("assets/img/loading.png", "loading_splashscreen", "img")
-                    .require("ConfigMap.json","test","json")
                     .download_all_assets(() => {
                         setTimeout(() => {
                             this.set_to("LOADING_UI_ASSETS");
