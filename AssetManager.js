@@ -44,10 +44,11 @@ class AssetManager {
                 img.src = this.queue[i].path;
             } else {
                 request = new XMLHttpRequest();
-                request.open('GET', this.assets[i].path, true);
+                request.overrideMimeType("application/json")
+                request.open('GET', this.queue[i].path, true);
                 request.onreadystatechange = () => {
                     if (request.readyState === 4 && request.stattus === "200") {
-                        this.assets.push({ name: this.assets[i].name, content: request.responseText });
+                        this.assets.push({ name: this.queue[i].name, content: request.responseText });
                         this.download_success++;
                         if (this.is_download_complete())
                             callback();

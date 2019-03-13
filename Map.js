@@ -2,7 +2,7 @@ class Map{
 
     constructor() {
         this.layout = new Array();
-        this.layout = [
+        /*this.layout = [
             [1, 1, 1, 1, 1, 1, 1, 1],
             [1, 0, 0, 0, 0, 0, 0, 1],
             [1, 0, 0, 0, 0, 0, 0, 1],
@@ -11,7 +11,10 @@ class Map{
             [1, 0, 0, 0, 0, 0, 0, 1],
             [1, 0, 0, 0, 0, 0, 0, 1],
             [1, 1, 1, 1, 1, 1, 1, 1]
-        ];
+        ];*/
+
+
+        this.layout = JSON.parse()
     }
 
     draw(){
