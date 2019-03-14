@@ -1,7 +1,7 @@
 class GameState {
 
     constructor(game) {
-        this.game=game;
+        this.game = game;
         this.name = "UNINITIALIZED";
         this.ui = null;
         this.ctx = game.ctx;
@@ -17,12 +17,12 @@ class GameState {
                 this.draw = () => { };
                 this.asset_manager
                     .require("assets/img/test.png", "test_img", "img")
-                    .require("ConfigMap.json","map","json")
+                    .require("ConfigMap.json", "map", "json")
                     .require("assets/img/loading.png", "loading_splashscreen", "img")
                     .download_all_assets(() => {
                         setTimeout(() => {
                             this.set_to("PLAYING");
-                        }, 1000);
+                        }, 0);
                     });
                 break;
             case "LOADING_UI_ASSETS":
@@ -58,8 +58,38 @@ class GameState {
                 }, 1000);
                 break;
             case "PLAYING":
+
+                // Elements
                 this.ui = new UI(this.ctx);
-                this.map=new Map(this.asset_manager.get_asset("map"));
+                this.map = new Map(this.asset_manager.get_asset("map"));
+                this.camera = new Camera(9, 9, this.game.viewport, this);
+
+                // Input handling
+                this.input_handler.listen_keyboard(true);
+                this.input_handler.set_onkeydown_action((event) => {
+
+                    if (event.keyCode == 109)
+                        this.camera.increment_distance_by(0.01);
+
+                    if (event.keyCode == 107)
+                        this.camera.increment_distance_by(-0.01);
+                    
+                    if (event.keyCode == 37)
+                        this.camera.x-=0.3;
+
+                    if (event.keyCode == 39)
+                        this.camera.x+=0.3;
+                        
+                    if (event.keyCode == 38)
+                        this.camera.y-=0.3;
+
+                    if (event.keyCode == 40)
+                        this.camera.y+=0.3;
+                    console.log(this.camera.end_x,this.camera.end_y);
+
+                });
+
+
                 this.draw = () => {
                     this.camera.render();
                     this.ui.draw();
