@@ -7,7 +7,7 @@ class Game {
         this.ctx=ctx;
         this.asset_manager=new AssetManager(); 
         this.state=new GameState(this);
-        
+        this.viewport=new Viewport(ctx.canvas.clientWidth,ctx.clientHeight);   
     }
     
     set_state_to(state) {

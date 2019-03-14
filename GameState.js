@@ -1,6 +1,7 @@
 class GameState {
 
     constructor(game) {
+        this.game=game;
         this.name = "UNINITIALIZED";
         this.ui = null;
         this.ctx = game.ctx;
@@ -20,7 +21,7 @@ class GameState {
                     .require("assets/img/loading.png", "loading_splashscreen", "img")
                     .download_all_assets(() => {
                         setTimeout(() => {
-                            this.set_to("LOADING_UI_ASSETS");
+                            this.set_to("PLAYING");
                         }, 1000);
                     });
                 break;
@@ -58,7 +59,9 @@ class GameState {
                 break;
             case "PLAYING":
                 this.ui = new UI(this.ctx);
+                this.map=new Map(this.asset_manager.get_asset("map"));
                 this.draw = () => {
+                    this.camera.render();
                     this.ui.draw();
                 };
                 break;

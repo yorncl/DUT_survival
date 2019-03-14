@@ -1,27 +1,8 @@
-class Map{
+class Map {
 
-    constructor() {
-        this.layout = new Array();
-        /*this.layout = [
-            [1, 1, 1, 1, 1, 1, 1, 1],
-            [1, 0, 0, 0, 0, 0, 0, 1],
-            [1, 0, 0, 0, 0, 0, 0, 1],
-            [1, 0, 0, 0, 0, 0, 0, 1],
-            [1, 0, 0, 0, 0, 0, 0, 1],
-            [1, 0, 0, 0, 0, 0, 0, 1],
-            [1, 0, 0, 0, 0, 0, 0, 1],
-            [1, 1, 1, 1, 1, 1, 1, 1]
-        ];*/
-
-
-        this.layout = JSON.parse()
+    constructor(json_asset) {
+        this.layout = JSON.parse(json_asset.content);
+        console.log(this.layout);
     }
 
-    draw(){
-        for (let i = 0; i < this.layout.length; i++) {
-            for (let j = 0; j < this.layout[i].length; j++) {
-                
-            }    
-        }
-    }
 }
