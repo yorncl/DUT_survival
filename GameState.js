@@ -62,7 +62,7 @@ class GameState {
                 // Elements
                 this.ui = new UI(this.ctx);
                 this.map = new Map(this.asset_manager.get_asset("map"));
-                this.camera = new Camera(9, 9, this.game.viewport, this);
+                this.camera = new Camera(0.5, 0.5, this.game.viewport, this);
 
                 // Input handling
                 this.input_handler.listen_keyboard(true);
@@ -85,7 +85,6 @@ class GameState {
 
                     if (event.keyCode == 40)
                         this.camera.y+=0.3;
-                    console.log(this.camera.end_x,this.camera.end_y);
 
                 });
 

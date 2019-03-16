@@ -27,7 +27,7 @@ window.onload = function () {
             game.draw();
             requestAnimationFrame(game_loop)
 
-        }, 20);
+        }, 10);
     }
     game_loop();
 }
