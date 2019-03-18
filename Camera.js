@@ -65,8 +65,7 @@ class Camera {
 
         // Player rendering
 
-
-        console.log(this.gamestate.player.x);
+        this.gamestate.player.draw((this.gamestate.player.x - this.delta_x)*this.GU_draw,(this.gamestate.player.y - this.delta_y)*this.GU_draw,this.GU_draw,this.GU_draw,this.gamestate.ctx);
 
         // Objects rendering
         

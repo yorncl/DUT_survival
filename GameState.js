@@ -7,6 +7,7 @@ class GameState {
         this.ctx = game.ctx;
         this.input_handler = new InputHandler(this);
         this.asset_manager = game.asset_manager;
+        this.player=null;
     }
 
     set_to(name) {
@@ -18,6 +19,7 @@ class GameState {
                 this.asset_manager
                     .require("assets/img/test.png", "test_img", "img")
                     .require("ConfigMap.json", "map", "json")
+                    .require("assets/img/player.png", "player", "img")
                     .require("assets/img/loading.png", "loading_splashscreen", "img")
                     .download_all_assets(() => {
                         setTimeout(() => {
@@ -63,31 +65,27 @@ class GameState {
                 this.ui = new UI(this.ctx);
                 this.map = new Map(this.asset_manager.get_asset("map"));
                 this.camera = new Camera(0.5, 0.5, this.game.viewport, this);
-                this.player= new Player(2,2,new Sprite);
+                this.player = new Player(2, 2, new Sprite(this.asset_manager.get_asset("player").content));
                 // Input handling
                 this.input_handler.listen_keyboard(true);
-                this.input_handler.set_onkeydown_action((event) => {
+                this.input_handler.set_keys_action((event) => {
 
-                    if (event.keyCode == 109)
-                        this.camera.increment_distance_by(0.01);
+                    if(this.input_handler.pressed_keys['ArrowUp'] )
+                        this.player.y-=0.3;
 
-                    if (event.keyCode == 107)
-                        this.camera.increment_distance_by(-0.01);
+                    if(this.input_handler.pressed_keys['ArrowDown'] )
+                        this.player.y+=0.3;
+
+                    if(this.input_handler.pressed_keys['ArrowLeft'] )
+                        this.player.x-=0.3;
+
+                    if(this.input_handler.pressed_keys['ArrowRight'] )
+                        this.player.x+=0.3;
                     
-                    if (event.keyCode == 37)
-                        this.camera.x-=0.3;
-
-                    if (event.keyCode == 39)
-                        this.camera.x+=0.3;
-                        
-                    if (event.keyCode == 38)
-                        this.camera.y-=0.3;
-
-                    if (event.keyCode == 40)
-                        this.camera.y+=0.3;
+                    this.camera.x=this.player.x;
+                    this.camera.y=this.player.y;
 
                 });
-
 
                 this.draw = () => {
                     this.camera.render();

@@ -2,12 +2,13 @@ class InputHandler {
 
     constructor(state) {
         this.state = state;
-        this.keys = null;
         this.onclick_action = null;
         this.keydown_action = null;
         this.keys_active = false;
         this.mouse_active = false;
-        document.addEventListener("keydown", (event) => { this.onkeydown(event) });
+        this.pressed_keys=new Array();
+        document.addEventListener("keydown", event => { this.pressed_keys[event.key] = true; });
+        document.addEventListener("keyup", event => { this.pressed_keys[event.key] = false; });
         this.state.ctx.canvas.addEventListener("click", (event) => { this.onclick(event) });
     }
 
@@ -19,20 +20,12 @@ class InputHandler {
         this.mouse_active = value;
     }
 
-    set_onkeydown_action(action) {
-        this.onkeydown_action = action;
+    set_keys_action(action) {
+        this.handle_keys_action = action;
     }
 
     set_onclick_action(action) {
         this.onclick_action = action;
-    }
-
-    onkeydown(event) {
-        if (!this.keys_active)
-            return;
-        if (this.onkeydown_action === null)
-            throw new Error("Please define onkeydown action with set_onkeydown_action()");
-        this.onkeydown_action(event);
     }
 
     onclick(event) {
@@ -54,6 +47,12 @@ class InputHandler {
             x: event.clientX - rect.left,
             y: event.clientY - rect.top
         };
+    }
+
+    handle(){
+       if(this.keys_active){
+            this.handle_keys_action();
+       }
     }
 
 }

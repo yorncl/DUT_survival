@@ -20,4 +20,8 @@ class Game {
         this.state.draw();
     }
 
+    handleInput(){
+        this.state.input_handler.handle();
+    }
+
 }

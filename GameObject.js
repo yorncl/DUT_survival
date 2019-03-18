@@ -6,8 +6,8 @@ class GameObject{
         this.sprite=sprite;
     }
 
-    draw(x,y,w,h){
-        this.sprite.draw(x,y,w,h);
+    draw(x,y,w,h,ctx){
+        this.sprite.draw(x,y,w,h,ctx);
     }
 
 }
