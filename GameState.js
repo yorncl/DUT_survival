@@ -64,7 +64,7 @@ class GameState {
 
                 // Elements
                 this.ui = new UI(this.ctx);
-                this.map = new Map(this.asset_manager.get_asset("map"),new Spritesheet(this.asset_manager.get_asset("map_spritesheet").content,32,10,10));
+                this.map = new Map(this.asset_manager.get_asset("map"), new Spritesheet(this.asset_manager.get_asset("map_spritesheet").content, 32, 10, 10));
                 this.camera = new Camera(0.5, 0.5, this.game.viewport, this);
                 this.player = new Player(2, 2, new Sprite(this.asset_manager.get_asset("player").content));
                 // Input handling
@@ -72,16 +72,16 @@ class GameState {
                 this.input_handler.set_keys_action((event) => {
 
                     if (this.input_handler.pressed_keys['ArrowUp'])
-                        this.player.y -= 0.1;
+                        this.player.y -= this.player.speed;
 
                     if (this.input_handler.pressed_keys['ArrowDown'])
-                        this.player.y += 0.1;
+                        this.player.y += this.player.speed;
 
                     if (this.input_handler.pressed_keys['ArrowLeft'])
-                        this.player.x -= 0.1;
+                        this.player.x -= this.player.speed;
 
                     if (this.input_handler.pressed_keys['ArrowRight'])
-                        this.player.x += 0.1;
+                        this.player.x += this.player.speed;
 
                     if (this.input_handler.pressed_keys['-'])
                         this.camera.distance += 0.01;

@@ -85,15 +85,15 @@ class Camera {
 
         let vx = this.gamestate.player.x - this.x;
         let vy = this.gamestate.player.y - this.y;
-
+        let speed = this.gamestate.player.speed;
 
         if (Math.abs(vx) > 1)
-            this.x += vx > 0 ? 0.1 : -0.1;
+            this.x += vx > 0 ? speed : -speed;
         else
             this.x += 0.05 * vx;
 
         if (Math.abs(vy) > 1)
-            this.y += vy > 0 ? 0.1 : -0.1;
+            this.y += vy > 0 ? speed : -speed;
         else
             this.y += 0.05 * vy;
 
