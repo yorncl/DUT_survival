@@ -45,22 +45,31 @@ class Camera {
         start_x = start_x < 0 ? 0 : start_x;
         start_y = start_y < 0 ? 0 : start_y;
 
+        end_x = end_x < this.map.layout[0].length ? this.map.layout[0].length : end_x;
+        end_y = end_y > this.map.layout.length ? this.map.layout.length : end_y;
+
         //Map rendering
         for (let i = start_y; i < end_y; i++) {
             for (let j = start_x; j < end_x; j++) {
-                //console.log(i + " - " + this.delta_y + " OU " + j + " - " + this.delta_x);
                 if (i > this.delta_y - 1 && j > this.delta_x - 1) {
-                    if (this.map.layout[i][j] == 1) {
-                        this.gamestate.ctx.fillStyle = "#FF0000";
-                        this.gamestate.ctx.fillRect((j - this.delta_x) * this.GU_draw, (i - this.delta_y) * this.GU_draw, this.GU_draw, this.GU_draw);
-                    }
-                    if (i == 0 && j == 0) {
-                        this.gamestate.ctx.fillStyle = "#0000FF";
-                        this.gamestate.ctx.fillRect((j - this.delta_x) * this.GU_draw, (i - this.delta_y) * this.GU_draw, this.GU_draw, this.GU_draw);
-                    }
+                   
+                        this.gamestate.ctx.drawImage(
+                            this.map.spritesheet.content,
+                            (this.map.layout[i][j] % this.map.spritesheet.width) * this.map.spritesheet.sprite_size,
+                            ~~(this.map.layout[i][j] / this.map.spritesheet.width) * this.map.spritesheet.sprite_size,
+                            this.map.spritesheet.sprite_size,
+                            this.map.spritesheet.sprite_size,
+                            (j - this.delta_x) * this.GU_draw,
+                            (i - this.delta_y) * this.GU_draw,
+                            this.GU_draw,
+                            this.GU_draw
+                        )
+                    
                 }
             }
         }
+
+
 
 
         // Player rendering
@@ -78,13 +87,13 @@ class Camera {
         let vy = this.gamestate.player.y - this.y;
 
 
-        if (Math.abs(vx) > 1) 
-            this.x += vx>0 ? 0.1 : -0.1;
+        if (Math.abs(vx) > 1)
+            this.x += vx > 0 ? 0.1 : -0.1;
         else
             this.x += 0.05 * vx;
 
         if (Math.abs(vy) > 1)
-            this.y += vy>0 ? 0.1 : -0.1;
+            this.y += vy > 0 ? 0.1 : -0.1;
         else
             this.y += 0.05 * vy;
 

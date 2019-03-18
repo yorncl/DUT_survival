@@ -20,6 +20,7 @@ class GameState {
                     .require("assets/img/test.png", "test_img", "img")
                     .require("ConfigMap.json", "map", "json")
                     .require("assets/img/player.png", "player", "img")
+                    .require("assets/img/map_spritesheet.png", "map_spritesheet", "img")
                     .require("assets/img/loading.png", "loading_splashscreen", "img")
                     .download_all_assets(() => {
                         setTimeout(() => {
@@ -63,7 +64,7 @@ class GameState {
 
                 // Elements
                 this.ui = new UI(this.ctx);
-                this.map = new Map(this.asset_manager.get_asset("map"));
+                this.map = new Map(this.asset_manager.get_asset("map"),new Spritesheet(this.asset_manager.get_asset("map_spritesheet").content,32,10,10));
                 this.camera = new Camera(0.5, 0.5, this.game.viewport, this);
                 this.player = new Player(2, 2, new Sprite(this.asset_manager.get_asset("player").content));
                 // Input handling
