@@ -33,7 +33,7 @@ class Camera {
         this.width = this.v_width * this.distance;
         this.height = this.v_height * this.distance;
 
-        //Translation matrix
+        //Translation
         this.delta_x = this.x - this.width / 2;
         this.delta_y = this.y - this.height / 2;
 
@@ -62,6 +62,13 @@ class Camera {
             }
         }
 
+
+        // Player rendering
+
+
+        console.log(this.gamestate.player.x);
+
+        // Objects rendering
         
 
     }

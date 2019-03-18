@@ -1,6 +1,7 @@
-class Player{
+class Player extends GameObject{
 
-    constructor(){
+    constructor(x, y , sprite){
+        super(x,y,sprite);
         this.score=0;
     }
 
