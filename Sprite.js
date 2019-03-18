@@ -1,12 +1,12 @@
 class Sprite extends Drawable{
 
-    constructor(x, y, width, height,ctx,img){
-        super(x, y, width, height,ctx);
+    constructor(width, height,ctx,img){
+        super(width, height,ctx);
         this.img=img;
     }
 
-    draw(){
-        this.ctx.drawImage(this.img,this.dx,this.dy,this.width,this.height);
+    draw(x,y){
+        this.ctx.drawImage(this.img,x-this.width/2,y-this.height/2,this.width,this.height);
     }
 
 }
