@@ -65,10 +65,28 @@ class Camera {
 
         // Player rendering
 
-        this.gamestate.player.draw((this.gamestate.player.x - this.delta_x)*this.GU_draw,(this.gamestate.player.y - this.delta_y)*this.GU_draw,this.GU_draw,this.GU_draw,this.gamestate.ctx);
+        this.gamestate.player.draw((this.gamestate.player.x - this.delta_x) * this.GU_draw, (this.gamestate.player.y - this.delta_y) * this.GU_draw, this.GU_draw, this.GU_draw, this.gamestate.ctx);
 
         // Objects rendering
-        
+
+
+    }
+
+    update_position() {
+
+        let vx = this.gamestate.player.x - this.x;
+        let vy = this.gamestate.player.y - this.y;
+
+
+        if (Math.abs(vx) > 1) 
+            this.x += vx>0 ? 0.1 : -0.1;
+        else
+            this.x += 0.05 * vx;
+
+        if (Math.abs(vy) > 1)
+            this.y += vy>0 ? 0.1 : -0.1;
+        else
+            this.y += 0.05 * vy;
 
     }
 

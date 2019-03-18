@@ -7,7 +7,7 @@ class GameState {
         this.ctx = game.ctx;
         this.input_handler = new InputHandler(this);
         this.asset_manager = game.asset_manager;
-        this.player=null;
+        this.player = null;
     }
 
     set_to(name) {
@@ -70,22 +70,30 @@ class GameState {
                 this.input_handler.listen_keyboard(true);
                 this.input_handler.set_keys_action((event) => {
 
-                    if(this.input_handler.pressed_keys['ArrowUp'] )
-                        this.player.y-=0.3;
+                    if (this.input_handler.pressed_keys['ArrowUp'])
+                        this.player.y -= 0.1;
 
-                    if(this.input_handler.pressed_keys['ArrowDown'] )
-                        this.player.y+=0.3;
+                    if (this.input_handler.pressed_keys['ArrowDown'])
+                        this.player.y += 0.1;
 
-                    if(this.input_handler.pressed_keys['ArrowLeft'] )
-                        this.player.x-=0.3;
+                    if (this.input_handler.pressed_keys['ArrowLeft'])
+                        this.player.x -= 0.1;
 
-                    if(this.input_handler.pressed_keys['ArrowRight'] )
-                        this.player.x+=0.3;
-                    
-                    this.camera.x=this.player.x;
-                    this.camera.y=this.player.y;
+                    if (this.input_handler.pressed_keys['ArrowRight'])
+                        this.player.x += 0.1;
+
+                    if (this.input_handler.pressed_keys['-'])
+                        this.camera.distance += 0.01;
+
+                    if (this.input_handler.pressed_keys['+'])
+                        this.camera.distance -= 0.01;
+
+
+
+                    this.camera.update_position();
 
                 });
+
 
                 this.draw = () => {
                     this.camera.render();
