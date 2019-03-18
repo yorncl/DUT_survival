@@ -63,7 +63,7 @@ class GameState {
                 this.ui = new UI(this.ctx);
                 this.map = new Map(this.asset_manager.get_asset("map"));
                 this.camera = new Camera(0.5, 0.5, this.game.viewport, this);
-
+                //this.sprite= new Player();
                 // Input handling
                 this.input_handler.listen_keyboard(true);
                 this.input_handler.set_onkeydown_action((event) => {

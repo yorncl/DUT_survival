@@ -25,8 +25,7 @@ window.onload = function () {
 
         setTimeout(()=>{
             game.draw();
-            requestAnimationFrame(game_loop)
-
+            requestAnimationFrame(game_loop);
         }, 10);
     }
     game_loop();
