@@ -5,8 +5,6 @@ class Spritesheet {
         this.sprite_size = sprite_size;
         this.width = width;
         this.height = height;
-
-        console.log(this);
     }
 
 }
