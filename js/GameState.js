@@ -17,7 +17,7 @@ class GameState {
             case "STARTING":
                 this.draw = () => { };
                 this.asset_manager
-                    .require("ConfigMap.json", "map", "json")
+                    .require("assets/map/ConfigMap.json", "map", "json")
                     .require("assets/img/player.png", "player", "img")
                     .require("assets/img/map_spritesheet.png", "map_spritesheet", "img")
                     .require("assets/img/loading.png", "loading_splashscreen", "img")
