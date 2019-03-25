@@ -52,19 +52,19 @@ class Camera {
         for (let i = start_y; i < end_y; i++) {
             for (let j = start_x; j < end_x; j++) {
                 if (i > this.delta_y - 1 && j > this.delta_x - 1) {
-                   
-                        this.gamestate.ctx.drawImage(
-                            this.map.spritesheet.content,
-                            (this.map.layout[i][j] % this.map.spritesheet.width) * this.map.spritesheet.sprite_size,
-                            ~~(this.map.layout[i][j] / this.map.spritesheet.width) * this.map.spritesheet.sprite_size,
-                            this.map.spritesheet.sprite_size,
-                            this.map.spritesheet.sprite_size,
-                            (j - this.delta_x) * this.GU_draw,
-                            (i - this.delta_y) * this.GU_draw,
-                            this.GU_draw,
-                            this.GU_draw
-                        )
-                    
+
+                    this.gamestate.ctx.drawImage(
+                        this.map.spritesheet.content,
+                        (this.map.layout[i][j] % this.map.spritesheet.width) * this.map.spritesheet.sprite_size,
+                        ~~(this.map.layout[i][j] / this.map.spritesheet.width) * this.map.spritesheet.sprite_size,
+                        this.map.spritesheet.sprite_size,
+                        this.map.spritesheet.sprite_size,
+                        (j - this.delta_x) * this.GU_draw,
+                        (i - this.delta_y) * this.GU_draw,
+                        this.GU_draw,
+                        this.GU_draw
+                    )
+
                 }
             }
         }
@@ -78,6 +78,13 @@ class Camera {
 
         // Objects rendering
 
+        for (let i = 0; i < this.map.pickups.length; i++) {
+            this.gamestate.ctx.drawImage(this.map.pickups[i].sprite,
+                (this.map.pickups[i].x - this.delta_x) * this.GU_draw,
+                (this.map.pickups[i].y - this.delta_y) * this.GU_draw,
+                this.GU_draw * this.map.pickups[i].width,
+                this.GU_draw * this.map.pickups[i].height);
+        }
 
     }
 

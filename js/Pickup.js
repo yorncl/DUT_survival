@@ -1,14 +1,12 @@
 class Pickup{
 
-    constructor(x,y, sprite){
-    	this.x=5;
-    	this.y=5;
-    	this.Sprite=sprite;
-        
+    constructor(x,y,height,width, sprite){
+    	this.x=x;
+        this.y=y;
+        this.height=height;
+        this.width=width;
+    	this.sprite=sprite;
     }
 
-    this.sprite.draw(this.x, this.y);
-
-    }
 
 }

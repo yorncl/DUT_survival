@@ -2,6 +2,7 @@ class UI {
 
     constructor(ctx) {
         this.Buttons = new Array();
+        this.Labels=new Array();
         this.Sprites= new Array();
         this.ctx = ctx;
     }
