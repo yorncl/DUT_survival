@@ -1,11 +1,7 @@
-class Pickup{
+class Pickup extends GameElement{
 
-    constructor(x,y,height,width, sprite){
-    	this.x=x;
-        this.y=y;
-        this.height=height;
-        this.width=width;
-    	this.sprite=sprite;
+    constructor(x,y,width,height, sprite){
+    	super(x,y,width,height,sprite);
     }
 
 

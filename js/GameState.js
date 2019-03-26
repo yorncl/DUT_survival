@@ -23,6 +23,7 @@ class GameState {
                     .require("assets/img/map_spritesheet.png", "map_spritesheet", "img")
                     .require("assets/img/loading.png", "loading_splashscreen", "img")
                     .require("assets/img/parchemin.png", "parchemin", "img")
+                    .require("assets/img/risitas.png", "enemy", "img")
                     .download_all_assets(() => {
                         setTimeout(() => {
                             this.set_to("PLAYING");
@@ -76,11 +77,12 @@ class GameState {
                 this.camera = new Camera(0.5, 0.5, this.game.viewport, this);
 
                 //PLAYER
-                this.player = new Player(2, 2, new Sprite(this.asset_manager.get_asset("player").content));
+                this.player = new Player(2, 2, this.asset_manager.get_asset("player").content);
 
                 //PICKUPS
                 Pickup.sprite = this.asset_manager.get_asset("parchemin").content;
-                this.map.intialize_pickups(5);
+                Enemy.sprite = this.asset_manager.get_asset("enemy").content;
+                this.map.init();
 
                 // Input handling
                 this.input_handler.listen_keyboard(true);
@@ -127,6 +129,10 @@ class GameState {
                                     this.map.pickups[i] = null;
                                 }
                         }
+                    }
+                    for (let i = 0; i < this.map.enemies.length; i++) {
+                        this.map.enemies[i].x+=0.02*(this.player.x-this.map.enemies[i].x);
+                        this.map.enemies[i].y+=0.02*(this.player.y-this.map.enemies[i].y);
                     }
 
                 }
