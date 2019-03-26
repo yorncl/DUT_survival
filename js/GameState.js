@@ -71,7 +71,6 @@ class GameState {
 
                 // UI
                 this.ui = new UI(this.ctx)
-                    .add_button(500, 50, 80, 40, "Loading", () => { })
                     .add_cursor(100, 100, this.asset_manager.get_asset("sight").content);
 
                 //MAP
