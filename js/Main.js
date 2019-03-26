@@ -8,9 +8,9 @@ window.onload = function () {
     canvas = document.getElementById("game_canvas")
 
     //Canvas initialization
-    let UNIT=80;
-    canvas.height = 9*UNIT;
-    canvas.width = 16*UNIT;
+    let UNIT = 80;
+    canvas.height = 9 * UNIT;
+    canvas.width = 16 * UNIT;
 
 
     //Game initialization
@@ -22,7 +22,7 @@ window.onload = function () {
 
     //Game loop
     function game_loop() {
-        setTimeout(()=>{
+        setTimeout(() => {
             game.handleInput();
             game.update();
             game.draw();

@@ -72,21 +72,34 @@ class Camera {
 
 
 
+        
+        // Decals rendering
+        for (let i = 0; i < this.map.decals.length; i++) {
+            if (this.map.decals[i] != null)
+            this.map.decals[i].draw(this.gamestate.ctx, this.delta_x, this.delta_y, this.GU_draw);
+        }
+        
         // Player rendering
-
-        this.gamestate.player.draw(this.gamestate.ctx,this.delta_x,this.delta_y,this.GU_draw);
-
-        // Objects rendering
-
+        this.gamestate.player.draw(this.gamestate.ctx, this.delta_x, this.delta_y, this.GU_draw);
+        
+        //Pickups rendering
         for (let i = 0; i < this.map.pickups.length; i++) {
-            if(this.map.pickups[i]!=null)
-                this.map.pickups[i].draw(this.gamestate.ctx,this.delta_x,this.delta_y,this.GU_draw);
+            if (this.map.pickups[i] != null)
+                this.map.pickups[i].draw(this.gamestate.ctx, this.delta_x, this.delta_y, this.GU_draw);
         }
 
+        //Enemies rendering
         for (let i = 0; i < this.map.enemies.length; i++) {
-            if(this.map.enemies[i]!=null)
-                this.map.enemies[i].draw(this.gamestate.ctx,this.delta_x,this.delta_y,this.GU_draw);
+            if (this.map.enemies[i] != null)
+                this.map.enemies[i].draw(this.gamestate.ctx, this.delta_x, this.delta_y, this.GU_draw);
         }
+
+        //Bullets rendering
+        for (let i = 0; i < this.map.bullets.length; i++) {
+            if (this.map.bullets[i] != null)
+                this.map.bullets[i].draw(this.gamestate.ctx, this.delta_x, this.delta_y, this.GU_draw);
+        }
+
 
     }
 
