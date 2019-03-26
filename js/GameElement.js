@@ -6,7 +6,6 @@ class GameElement{
         this.width = w;
         this.height = h;
         this.sprite = sprite;
-        console.log(this.sprite); 
     }
 
     draw(ctx,delta_x,delta_y,GU_draw){

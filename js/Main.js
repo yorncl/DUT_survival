@@ -22,7 +22,6 @@ window.onload = function () {
 
     //Game loop
     function game_loop() {
-
         setTimeout(()=>{
             game.handleInput();
             game.update();

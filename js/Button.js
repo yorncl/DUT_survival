@@ -1,7 +1,7 @@
 class Button extends Drawable {
 
-    constructor(x, y, width, height, label, ctx, action) {
-        super(x, y, width, height, ctx);
+    constructor(x, y, width, height, label, action) {
+        super(x, y, width, height);
         this.label = label;
         this.onclick = action;
     }
@@ -13,11 +13,11 @@ class Button extends Drawable {
             return false;
     }
 
-    draw() {
-        this.ctx.fillStyle = "#FF0000";
-        this.ctx.fillRect(this.dx, this.dy, this.width, this.height);
-        this.ctx.font = "15px Arial";
-        this.ctx.strokeText(this.label, this.x-this.width/4, this.y+this.height/4); 
+    draw(ctx) {
+        ctx.fillStyle = "#FF0000";
+        ctx.fillRect(this.dx, this.dy, this.width, this.height);
+        ctx.font = "15px Arial";
+        ctx.strokeText(this.label, this.x-this.width/4, this.y+this.height/4); 
     }
 
 }

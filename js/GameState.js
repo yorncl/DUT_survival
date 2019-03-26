@@ -68,7 +68,9 @@ class GameState {
             case "PLAYING":
 
                 // UI
-                this.ui = new UI(this.ctx);
+                this.ui = new UI(this.ctx)
+                    .add_button(500, 50, 80, 40, "Loading", () => { })
+                    .add_cursor(100, 100, this.asset_manager.get_asset("player").content);
 
                 //MAP
                 this.map = new Map(this.asset_manager.get_asset("map"), new Spritesheet(this.asset_manager.get_asset("map_spritesheet").content, 32, 24, 124));
@@ -85,10 +87,9 @@ class GameState {
                 this.map.init();
 
                 // Input handling
-                this.input_handler.listen_keyboard(true);
                 this.input_handler.set_keys_action((event) => {
 
-                    
+
                     if (this.input_handler.pressed_keys['ArrowUp'])
                         if (this.map.layout[~~(this.player.y - this.player.hitbox_radius)][~~this.player.x] == 0)
                             this.player.y -= this.player.speed;
@@ -115,6 +116,15 @@ class GameState {
 
                 });
 
+                this.input_handler.set_onmousemove_action((x, y) => {
+                    console.log("moved !");
+                    this.ui.cursor.x=x;
+                    this.ui.cursor.y=y;
+                });
+
+                this.input_handler.listen_keyboard(true);
+                this.input_handler.listen_mouse(true);
+
                 this.update = () => {
                     this.camera.update_position();
 
@@ -122,17 +132,17 @@ class GameState {
                     let dx;
                     let dy;
                     for (let i = 0; i < this.map.pickups.length; i++) {
-                        if ( this.map.pickups[i]!=null ) {
-                                dx=Math.abs(this.player.x - this.map.pickups[i].x);
-                                dy=Math.abs(this.player.y - this.map.pickups[i].y);
-                                if(dx*dx +dy*dy < this.player.hitbox_radius*this.player.hitbox_radius){
-                                    this.map.pickups[i] = null;
-                                }
+                        if (this.map.pickups[i] != null) {
+                            dx = Math.abs(this.player.x - this.map.pickups[i].x);
+                            dy = Math.abs(this.player.y - this.map.pickups[i].y);
+                            if (dx * dx + dy * dy < this.player.hitbox_radius * this.player.hitbox_radius) {
+                                this.map.pickups[i] = null;
+                            }
                         }
                     }
                     for (let i = 0; i < this.map.enemies.length; i++) {
-                        this.map.enemies[i].x+=0.02*(this.player.x-this.map.enemies[i].x);
-                        this.map.enemies[i].y+=0.02*(this.player.y-this.map.enemies[i].y);
+                        this.map.enemies[i].x += 0.02 * (this.player.x - this.map.enemies[i].x);
+                        this.map.enemies[i].y += 0.02 * (this.player.y - this.map.enemies[i].y);
                     }
 
                 }

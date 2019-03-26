@@ -10,6 +10,7 @@ class InputHandler {
         document.addEventListener("keydown", event => { this.pressed_keys[event.key] = true; });
         document.addEventListener("keyup", event => { this.pressed_keys[event.key] = false; });
         this.state.ctx.canvas.addEventListener("click", (event) => { this.onclick(event) });
+        this.state.ctx.canvas.addEventListener("mousemove", (event) => { this.onmousemove(event) });
     }
 
     listen_keyboard(value) {
@@ -28,6 +29,10 @@ class InputHandler {
         this.onclick_action = action;
     }
 
+    set_onmousemove_action(action){
+        this.onmousemove_action=action;
+    }
+
     onclick(event) {
         if (!this.mouse_active)
             return;
@@ -35,6 +40,16 @@ class InputHandler {
             throw new Error("Please define onclick action with set_onclick_action()");
         let pos = this.get_mouse_xy(event);
         this.onclick_action(pos.x, pos.y);
+    }
+
+    onmousemove(event){
+        if (!this.mouse_active)
+            return;
+        if (this.onmousemove_action === null)
+            throw new Error("Please define onmousemove action with set_onmousemove_action()");
+
+        let pos = this.get_mouse_xy(event);
+        this.onmousemove_action(pos.x, pos.y);
     }
 
     set_controls_to(keys) {
