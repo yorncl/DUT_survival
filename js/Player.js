@@ -4,7 +4,7 @@ class Player extends GameObject{
         super(x,y,sprite);
         this.score=0;
         this.speed=0.12;
-        this.hitbox_radius=1;
+        this.hitbox_radius=0.5;
     }
 
 }

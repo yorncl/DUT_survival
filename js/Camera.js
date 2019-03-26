@@ -79,9 +79,10 @@ class Camera {
         // Objects rendering
 
         for (let i = 0; i < this.map.pickups.length; i++) {
+            if(this.map.pickups[i]!=null)
             this.gamestate.ctx.drawImage(this.map.pickups[i].sprite,
-                (this.map.pickups[i].x - this.delta_x) * this.GU_draw,
-                (this.map.pickups[i].y - this.delta_y) * this.GU_draw,
+                (this.map.pickups[i].x - this.delta_x -0.5*this.map.pickups[i].width) * this.GU_draw,
+                (this.map.pickups[i].y - this.delta_y - 0.5* this.map.pickups[i].height) * this.GU_draw,
                 this.GU_draw * this.map.pickups[i].width,
                 this.GU_draw * this.map.pickups[i].height);
         }
