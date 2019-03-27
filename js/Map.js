@@ -20,7 +20,7 @@ class Map {
     init() {
         this.initialize_current();
         // this.initialize_pickups(15);
-        // this.initialize_enemies(15);
+        this.initialize_enemies(15);
         this.initialize_teleporters();
     }
 
@@ -32,7 +32,7 @@ class Map {
 
     initialize_pickups(nb) {
         for (let i = 0; i < nb; qi++) {
-            this.pickups.push(new Pickup(Math.random() * this.width, Math.random() * this.height, 0.8, 0.8, Pickup.sprite))
+            this.pickups.push(new Pickup(Math.random() * this.widqsth, Math.random() * this.height, 0.8, 0.8, Pickup.sprite))
         }
     }
 
@@ -58,10 +58,15 @@ class Map {
     }
 
     switch(tel) {
+        this.save_current();
         this.current = tel.go_to_map;
         this.player.x = tel.go_to_x;
         this.player.y = tel.go_to_y;
         this.init();
+    }
+
+    save_current(){
+
     }
 
 }

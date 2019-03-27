@@ -151,7 +151,7 @@ class GameState {
                     for (let i = 0; i < this.map.teleporters.length; i++) {
                         if (this.map.teleporters[i].is_on(px, py)) {
                             this.map.switch(this.map.teleporters[i]);
-                            return;   
+                            return;
                         }
                     }
 
@@ -167,22 +167,49 @@ class GameState {
                             }
                         }
                     }
+
+                    //Enemies
+                    let enemy;
+                    let enemy2;
+                    let collision;
                     for (let i = 0; i < this.map.enemies.length; i++) {
-                        this.map.enemies[i].x += 0.02 * (this.player.x - this.map.enemies[i].x);
-                        this.map.enemies[i].y += 0.02 * (this.player.y - this.map.enemies[i].y);
+                        enemy = this.map.enemies[i];
+                        collision = false;
+                        let j;
+                        for (j = 0; j < this.map.enemies.length; j++) {
+                            enemy2 = this.map.enemies[j];
+                            if (i != j) {
+                                dx = Math.abs(enemy.x - enemy2.x);
+                                dy = Math.abs(enemy.y - enemy2.y);
+                                if (dx * dx + dy * dy < 0.5)
+                                    collision = true;
+                                break;
+                            }
+                        }
+
+                            enemy.x += 0.02 * (this.player.x - enemy.x);
+                            enemy.y += 0.02 * (this.player.y - enemy.y);
+                        if(collision){
+                            enemy.x -= (enemy2.x - enemy.x);
+                            enemy.y -= (enemy2.y - enemy.y);
+                        }
                     }
 
                     //Bullets
+                    let bullet;
                     for (let i = 0; i < this.map.bullets.length; i++) {
-                        this.map.bullets[i].update();
-
-                        if (this.map.bullets[i].x > 0 && this.map.bullets[i].x < this.map.width &&
-                            this.map.bullets[i].y > 0 && this.map.bullets[i].y < this.map.height) {
+                        bullet = this.map.bullets[i];
+                        bullet.update();
+                        if (bullet.x > 0 && bullet.x < this.map.width &&
+                            bullet.y > 0 && bullet.y < this.map.height &&
+                            this.map.layout[~~bullet.y][~~bullet.x] == 0) {
                             for (let j = 0; j < this.map.enemies.length; j++) {
-                                dx = Math.abs(this.map.bullets[i].x - this.map.enemies[j].x);
-                                dy = Math.abs(this.map.bullets[i].y - this.map.enemies[j].y);
-                                if (dx * dx + dy * dy < 0.25)
+                                dx = Math.abs(bullet.x - this.map.enemies[j].x);
+                                dy = Math.abs(bullet.y - this.map.enemies[j].y);
+                                if (dx * dx + dy * dy < 0.25) {
                                     this.map.decals.push(Decal.new_blood_decal(this.map.enemies[j].x, this.map.enemies[j].y, 0.5, 0.5));
+                                    this.map.bullets[i]
+                                }
                                 if (this.map.decals.length > Decal.max)
                                     this.map.decals.shift();
                             }
