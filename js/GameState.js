@@ -69,24 +69,32 @@ class GameState {
                 break;
             case "PLAYING":
 
+
+                //Sprite init
+                Player.sprite = this.asset_manager.get_asset("player").content;
+                Pickup.sprite = this.asset_manager.get_asset("parchemin").content;
+                Enemy.sprite = this.asset_manager.get_asset("enemy").content;
+                Bullet.sprite = this.asset_manager.get_asset("player").content;
+                Decal.blood_sprite = this.asset_manager.get_asset("blood").content;
                 // UI
                 this.ui = new UI(this.ctx)
                     .add_cursor(100, 100, this.asset_manager.get_asset("sight").content);
 
                 //MAP
-                this.map = new Map(this.asset_manager.get_asset("map"), new Spritesheet(this.asset_manager.get_asset("map_spritesheet").content, 32, 24, 124));
+                this.map = new Map(this.asset_manager.get_asset("map"),
+                    new Spritesheet(this.asset_manager.get_asset("map_spritesheet").content,
+                        32,
+                        24,
+                        124
+                    ));
+
 
                 //CAMERA
                 this.camera = new Camera(0.5, 0.5, this.game.viewport, this);
 
                 //PLAYER
-                this.player = new Player(2, 2, this.asset_manager.get_asset("player").content);
+                this.player = this.map.player;
 
-                //Sprite init
-                Pickup.sprite = this.asset_manager.get_asset("parchemin").content;
-                Enemy.sprite = this.asset_manager.get_asset("enemy").content;
-                Bullet.sprite = this.asset_manager.get_asset("player").content;
-                Decal.blood_sprite = this.asset_manager.get_asset("blood").content;
 
                 //MAP init
                 this.map.init();
@@ -118,7 +126,6 @@ class GameState {
 
                 });
 
-
                 this.input_handler.set_onclick_action((x, y) => {
                     let dx = x - this.game.viewport.width / 2;
                     let dy = y - this.game.viewport.height / 2;
@@ -138,6 +145,16 @@ class GameState {
 
                     this.camera.update_position();
 
+                    //Teleporters
+                    let px = ~~this.player.x;
+                    let py = ~~this.player.y;
+                    for (let i = 0; i < this.map.teleporters.length; i++) {
+                        if (this.map.teleporters[i].is_on(px, py)) {
+                            this.map.switch(this.map.teleporters[i]);
+                            return;   
+                        }
+                    }
+
                     //Pickups
                     let dx;
                     let dy;
@@ -155,15 +172,25 @@ class GameState {
                         this.map.enemies[i].y += 0.02 * (this.player.y - this.map.enemies[i].y);
                     }
 
+                    //Bullets
                     for (let i = 0; i < this.map.bullets.length; i++) {
                         this.map.bullets[i].update();
 
-                        for (let j = 0; j < this.map.enemies.length; j++) {
-                            dx=Math.abs(this.map.bullets[i].x -this.map.enemies[j].x);
-                            dy=Math.abs(this.map.bullets[i].y -this.map.enemies[j].y);
-                           if(dx*dx + dy*dy < 0.25)
-                                this.map.decals.push(Decal.new_blood_decal(this.map.enemies[j].x,this.map.enemies[j].y,0.5,0.5));
+                        if (this.map.bullets[i].x > 0 && this.map.bullets[i].x < this.map.width &&
+                            this.map.bullets[i].y > 0 && this.map.bullets[i].y < this.map.height) {
+                            for (let j = 0; j < this.map.enemies.length; j++) {
+                                dx = Math.abs(this.map.bullets[i].x - this.map.enemies[j].x);
+                                dy = Math.abs(this.map.bullets[i].y - this.map.enemies[j].y);
+                                if (dx * dx + dy * dy < 0.25)
+                                    this.map.decals.push(Decal.new_blood_decal(this.map.enemies[j].x, this.map.enemies[j].y, 0.5, 0.5));
+                                if (this.map.decals.length > Decal.max)
+                                    this.map.decals.shift();
+                            }
+                        } else {
+                            this.map.bullets.splice(i, 1);
+
                         }
+
                     }
 
                 }

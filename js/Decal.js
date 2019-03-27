@@ -9,3 +9,6 @@ class Decal extends GameElement {
     }
 
 }
+
+
+Decal.max=10;
