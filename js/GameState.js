@@ -20,7 +20,7 @@ class GameState {
                 this.asset_manager
                     .require("assets/map/ConfigMap.json", "map", "json")
                     .require("assets/img/player.png", "player", "img")
-                    .require("assets/img/map_spritesheet.png", "map_spritesheet", "img")
+                    .require("assets/img/spritesheet_map.png", "map_spritesheet", "img")
                     .require("assets/img/loading.png", "loading_splashscreen", "img")
                     .require("assets/img/parchemin.png", "parchemin", "img")
                     .require("assets/img/risitas.png", "enemy", "img")
@@ -84,8 +84,8 @@ class GameState {
                 this.map = new Map(this.asset_manager.get_asset("map"),
                     new Spritesheet(this.asset_manager.get_asset("map_spritesheet").content,
                         32,
-                        24,
-                        124
+                        2,
+                        8
                     ));
 
 

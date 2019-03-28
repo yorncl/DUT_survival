@@ -14,12 +14,12 @@ class Map {
         this.width = null;
         this.height = null;
         this.initialize_player();
+        //this.initialize_pickups(15);
     }
 
 
     init() {
         this.initialize_current();
-        // this.initialize_pickups(15);
         this.initialize_enemies(15);
         this.initialize_teleporters();
     }
@@ -31,12 +31,15 @@ class Map {
     }
 
     initialize_pickups(nb) {
-        for (let i = 0; i < nb; qi++) {
-            this.pickups.push(new Pickup(Math.random() * this.widqsth, Math.random() * this.height, 0.8, 0.8, Pickup.sprite))
-        }
+        let map_nb= Object.keys(this.data).length;
+        for (let i = 0; i < nb; i++) {
+                console.log(~~(Math.random()*map_nb));
+                    this.data["main"].pickups.push(new Pickup(Math.random() * this.width, Math.random() * this.height, 0.8, 0.8, Pickup.sprite));
+                }
     }
 
     initialize_enemies(nb) {
+        this.enemies = new Array();
         for (let i = 0; i < nb; i++) {
             this.enemies.push(new Enemy(Math.random() * this.width, Math.random() * this.height, 0.8, 0.8, Enemy.sprite))
         }
@@ -65,7 +68,7 @@ class Map {
         this.init();
     }
 
-    save_current(){
+    save_current() {
 
     }
 

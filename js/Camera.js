@@ -68,11 +68,7 @@ class Camera {
                 }
             }
         }
-
-
-
-
-        
+                
         // Decals rendering
         for (let i = 0; i < this.map.decals.length; i++) {
             if (this.map.decals[i] != null)

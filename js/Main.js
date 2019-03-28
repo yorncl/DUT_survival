@@ -12,10 +12,8 @@ window.onload = function () {
     canvas.height = 9 * UNIT;
     canvas.width = 16 * UNIT;
 
-
     //Game initialization
     game = new Game(canvas.getContext("2d"));
-
 
     //Basic scripts
     game.set_state_to("STARTING");
