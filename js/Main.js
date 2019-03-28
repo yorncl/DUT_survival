@@ -11,9 +11,10 @@ window.onload = function () {
     let UNIT = 80;
     canvas.height = 9 * UNIT;
     canvas.width = 16 * UNIT;
-
+    let ctx=canvas.getContext("2d");
+    ctx.imageSmoothingEnabled = false;
     //Game initialization
-    game = new Game(canvas.getContext("2d"));
+    game = new Game(ctx);
 
     //Basic scripts
     game.set_state_to("STARTING");
