@@ -10,7 +10,7 @@ Everything is developed from scratch and acts as a simple game framework.
 * zoom in and out with numpad's "+" and "-"
 * go around several different rooms
 * pick up scrolls that grants you points on your grades
-
+* shoot with left mouse-click
 
 ### More to come :
 
