@@ -163,7 +163,7 @@ class GameState {
                         if (this.map.pickups[i] != null) {
                             dx = Math.abs(this.player.x - this.map.pickups[i].x);
                             dy = Math.abs(this.player.y - this.map.pickups[i].y);
-                            if (dx * dx + dy * dy < this.player.hitbox_radius * this.player.hitbox_radius) {
+                            if (dx * dx + dy * dy < this.player.hitbox_radius * this.player.hitbox_radius + 0.1) {
                                 this.map.pickups[i] = null;
                                 this.player.score++;
                                 if (this.player.score >= 20)
@@ -242,6 +242,8 @@ class GameState {
                         clearInterval(refresh);
                         this.set_to("FAILED");
                     }
+                    if (this.player.score >= 20)
+                        clearInterval(refresh);
                     countdown.innerHTML = "Temps restant : " + countdown_value + "s";
                     countdown_value--;
                 }, 1000);
