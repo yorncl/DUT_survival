@@ -14,14 +14,14 @@ class Map {
         this.width = null;
         this.height = null;
         this.initialize_player();
-        this.initialize_pickups(4);
+        this.initialize_pickups(10);
     }
-    
-    
+
+
     init() {
         this.initialize_current();
         this.pickups = this.current.pickups;
-      //  this.initialize_enemies(15);
+        //  this.initialize_enemies(15);
         this.initialize_teleporters();
     }
 
@@ -39,14 +39,20 @@ class Map {
 
         outerloop:
         while (nb > 0) {
-            let width,height;
+            let width, height, x, y;
             for (let key in this.data) {
                 width = this.data[key].layout[0].length;
                 height = this.data[key].layout.length;
                 if (nb <= 0)
                     break outerloop;
                 if (Math.random() > 0.5) {
-                    this.data[key].pickups.push(new Pickup(Math.random() * width, Math.random() * height, 0.8, 0.8, Pickup.sprite));
+                    x = Math.random() * width;
+                    y = Math.random() * height;
+                    while (this.data[key].layout[~~y][~~x] != 0) {
+                        x = Math.random() * width;
+                        y = Math.random() * height;
+                    }
+                    this.data[key].pickups.push(new Pickup(x, y, 0.8, 0.8, Pickup.sprite));
                     nb--;
                 }
 

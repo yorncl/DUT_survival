@@ -59,10 +59,10 @@ class Camera {
                         ~~(this.map.layout[i][j] / this.map.spritesheet.width) * this.map.spritesheet.sprite_size,
                         this.map.spritesheet.sprite_size,
                         this.map.spritesheet.sprite_size,
-                        ~~((j - this.delta_x) * this.GU_draw),
-                        ~~((i - this.delta_y) * this.GU_draw),
-                        ~~this.GU_draw,
-                        ~~this.GU_draw
+                        ~~((j - this.delta_x) * Math.round(this.GU_draw)),
+                        ~~((i - this.delta_y) * Math.round(this.GU_draw)),
+                        Math.round(this.GU_draw),
+                        Math.round(this.GU_draw)
                     )
 
                 }
