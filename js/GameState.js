@@ -221,15 +221,18 @@ class GameState {
                             this.map.bullets.splice(i, 1);
 
                         }
-
+                        
                     }
-
+                    
                 }
-
+                
                 this.draw = () => {
                     this.camera.render();
                     this.ui.draw();
                     score.innerHTML = "Note : " + this.player.score;
+                    
+                    //SOLUTION PROVISOIRE
+                    countdown.innerHTML = "Temps restant : " + countdown_value + "s";
                 };
 
                 //SOLUTION PROVISOIRE
@@ -244,7 +247,6 @@ class GameState {
                     }
                     if (this.player.score >= 20)
                         clearInterval(refresh);
-                    countdown.innerHTML = "Temps restant : " + countdown_value + "s";
                     countdown_value--;
                 }, 1000);
 
