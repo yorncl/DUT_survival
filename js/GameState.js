@@ -17,6 +17,7 @@ class GameState {
             case "STARTING":
                 this.draw = () => { };
                 this.update = () => { };
+                this.ui = new UI(this.ctx).add_button(this.ctx.canvas.width / 2, this.ctx.canvas.width / 2, 80, 40, "Loading", () => { });
                 this.asset_manager
                     .require("assets/map/ConfigMap.json", "map", "json")
                     .require("assets/img/player.png", "player", "img")
@@ -165,6 +166,8 @@ class GameState {
                             if (dx * dx + dy * dy < this.player.hitbox_radius * this.player.hitbox_radius) {
                                 this.map.pickups[i] = null;
                                 this.player.score++;
+                                if (this.player.score >= 20)
+                                    this.set_to("WON");
                             }
                         }
                     }
@@ -226,13 +229,48 @@ class GameState {
                 this.draw = () => {
                     this.camera.render();
                     this.ui.draw();
-                    score.innerHTML = this.player.score;
+                    score.innerHTML = "Note : " + this.player.score;
                 };
 
                 //SOLUTION PROVISOIRE
                 let score = document.getElementById("score");
-                
+                let countdown = document.getElementById("countdown");
+                let countdown_value = 30;
 
+                let refresh = setInterval(() => {
+                    if (countdown_value <= 0 && this.player.score < 20) {
+                        clearInterval(refresh);
+                        this.set_to("FAILED");
+                    }
+                    countdown.innerHTML = "Temps restant : " + countdown_value + "s";
+                    countdown_value--;
+                }, 1000);
+
+
+                break;
+
+            case "FAILED":
+                this.draw = () => { this.ui.draw(); }
+                this.update = () => { };
+
+                this.ui = new UI(this.ctx)
+                    .add_button(100, 100, 120, 40, "Failed, try again ?", () => {
+                        this.set_to("PLAYING");
+                    })
+                    .add_cursor(100, 100, this.asset_manager.get_asset("sight").content);
+                this.input_handler.set_onclick_action((x, y) => { this.ui.onclick(x, y); });
+                break;
+
+            case "WON":
+                this.draw = () => { this.ui.draw(); }
+                this.update = () => { };
+
+                this.ui = new UI(this.ctx)
+                    .add_button(100, 100, 120, 40, "Won, play again ?", () => {
+                        this.set_to("PLAYING");
+                    })
+                    .add_cursor(100, 100, this.asset_manager.get_asset("sight").content);
+                this.input_handler.set_onclick_action((x, y) => { this.ui.onclick(x, y); });
                 break;
             default:
                 throw new Error("No such Gamestate as " + name);

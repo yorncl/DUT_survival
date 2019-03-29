@@ -17,7 +17,7 @@ class Button extends Drawable {
         ctx.fillStyle = "#FF0000";
         ctx.fillRect(this.dx, this.dy, this.width, this.height);
         ctx.font = "15px Arial";
-        ctx.strokeText(this.label, this.x-this.width/4, this.y+this.height/4); 
+        ctx.strokeText(this.label, this.x-this.width/2 +3, this.y+this.height/4); 
     }
 
 }
