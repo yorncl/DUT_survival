@@ -8,7 +8,7 @@ Everything is developed from scratch and acts as a simple game framework.
 
 * move with keys "Z Q S D"
 * zoom in and out with numpad's "+" and "-"
-* go aorund several different rooms
+* go around several different rooms
 * pick up scrolls that grants you points on your grades
 
 
