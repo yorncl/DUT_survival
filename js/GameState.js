@@ -229,24 +229,22 @@ class GameState {
                 this.draw = () => {
                     this.camera.render();
                     this.ui.draw();
-                    score.innerHTML = "Note : " + this.player.score;
-                    
-                    //SOLUTION PROVISOIRE
-                    countdown.innerHTML = "Temps restant : " + countdown_value + "s";
+                    score.innerHTML = "Note : " + this.player.score;  
                 };
-
+                
                 //SOLUTION PROVISOIRE
                 let score = document.getElementById("score");
                 let countdown = document.getElementById("countdown");
                 let countdown_value = 20;
-
+                
                 let refresh = setInterval(() => {
+                    countdown.innerHTML = "Temps restant : " + countdown_value + "s";
                     if (countdown_value <= 0 && this.player.score < 20) {
                         clearInterval(refresh);
                         this.set_to("FAILED");
                     }
                     if (this.player.score >= 20)
-                        clearInterval(refresh);
+                    clearInterval(refresh);
                     countdown_value--;
                 }, 1000);
 
