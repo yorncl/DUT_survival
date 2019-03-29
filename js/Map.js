@@ -46,9 +46,9 @@ class Map {
                 if (nb <= 0)
                     break outerloop;
                 if (Math.random() > 0.5) {
-                    x = Math.random() * width;
+                    x = Math.random() * width ;
                     y = Math.random() * height;
-                    while (this.data[key].layout[~~y][~~x] != 0) {
+                    while (this.data[key].layout[~~y][~~x] != 0 || ~~x<2 || ~~y<2 ||~~x ==width-1 || ~~y ==height-1 ) {
                         x = Math.random() * width;
                         y = Math.random() * height;
                     }

@@ -164,6 +164,7 @@ class GameState {
                             dy = Math.abs(this.player.y - this.map.pickups[i].y);
                             if (dx * dx + dy * dy < this.player.hitbox_radius * this.player.hitbox_radius) {
                                 this.map.pickups[i] = null;
+                                this.player.score++;
                             }
                         }
                     }
@@ -187,9 +188,9 @@ class GameState {
                             }
                         }
 
-                            enemy.x += 0.02 * (this.player.x - enemy.x);
-                            enemy.y += 0.02 * (this.player.y - enemy.y);
-                        if(collision){
+                        enemy.x += 0.02 * (this.player.x - enemy.x);
+                        enemy.y += 0.02 * (this.player.y - enemy.y);
+                        if (collision) {
                             enemy.x -= (enemy2.x - enemy.x);
                             enemy.y -= (enemy2.y - enemy.y);
                         }
@@ -225,7 +226,12 @@ class GameState {
                 this.draw = () => {
                     this.camera.render();
                     this.ui.draw();
+                    score.innerHTML = this.player.score;
                 };
+
+                //SOLUTION PROVISOIRE
+                let score = document.getElementById("score");
+                
 
                 break;
             default:
