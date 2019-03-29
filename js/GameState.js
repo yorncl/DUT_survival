@@ -235,7 +235,7 @@ class GameState {
                 //SOLUTION PROVISOIRE
                 let score = document.getElementById("score");
                 let countdown = document.getElementById("countdown");
-                let countdown_value = 30;
+                let countdown_value = 20;
 
                 let refresh = setInterval(() => {
                     if (countdown_value <= 0 && this.player.score < 20) {
